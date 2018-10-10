@@ -47,7 +47,8 @@
                         Enables Kubernetes IP finder and setting custom namespace and service names.
                     -->
                     <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
-                        <property name="namespace" value="ssi-ssi-perf"/>
+                    <property name="masterUrl" value="https://10.0.0.1:443"/>
+                    <property name="namespace" value="ssi-ssi-perf"/>
                     </bean>
                 </property>
             </bean>

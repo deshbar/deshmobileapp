@@ -37,7 +37,7 @@
                         <property name="persistenceEnabled" value="true"/>
                         <!-- Enabling RANDOM_LRU eviction for this region.  -->
                         <property name="pageEvictionMode" value="RANDOM_LRU"/>
-                        <!-- Increasing the buffer size to 1 GB. -->
+                        <!-- Increasing the buffer size to 5 GB. -->
                         <property name="checkpointPageBufferSize" value="#{5L * 1024 * 1024 * 1024}"/>
                     </bean>
                 </property>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
@@ -7,48 +6,59 @@
   The ASF licenses this file to You under the Apache License, Version 2.0
   (the "License"); you may not use this file except in compliance with
   the License.  You may obtain a copy of the License at
-
        http://www.apache.org/licenses/LICENSE-2.0
-
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
 <!--
     Configuration example with Kubernetes IP finder enabled.
 -->
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-
     <bean class="org.apache.ignite.configuration.IgniteConfiguration">
-
-        <!-- Enabling Apache Ignite Persistent Store. -->
+        <!-- Redefining maximum memory size for the cluster node usage. -->
         <property name="dataStorageConfiguration">
             <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
+                <!-- Redefining the default region's settings -->
                 <property name="defaultDataRegionConfiguration">
                     <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
+                        <property name="name" value="Default_Region"/>
+                        <!-- 500 MB initial size (RAM). -->
+                        <property name="initialSize" value="#{500L * 1024 * 1024}"/>
+                        <!-- Setting the size of the default region to 10GB. -->
+                        <property name="maxSize" value="#{10L * 1024 * 1024 * 1024}"/>
                         <property name="persistenceEnabled" value="true"/>
+                        <!-- Enabling RANDOM_LRU eviction for this region.  -->
+                        <property name="pageEvictionMode" value="RANDOM_LRU"/>
+                        <!-- Increasing the buffer size to 1 GB. -->
+                        <property name="checkpointPageBufferSize" value="#{1L * 1024 * 1024 * 1024}"/>
                     </bean>
                 </property>
+                <!-- Set the page size to 8 KB -->
+                <property name="pageSize" value="#{8 * 1024}"/>
+                <!-- Changing WAL Mode. -->
+                <property name="walMode" value="NONE"/>
+                <!-- Enable write throttling. -->
+                <property name="writeThrottlingEnabled" value="true"/>
             </bean>
         </property>
-
         <!-- Explicitly configure TCP discovery SPI to provide list of initial nodes. -->
         <property name="discoverySpi">
             <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
                 <property name="ipFinder">
                     <!--
-                        Enables Kubernetes IP finder and setting custom namespace and service names.
+                        Enables Kubernetes IP finder with default settings.
                     -->
                     <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
-                    <property name="masterUrl" value="https://10.0.0.1:443"/>
-                    <property name="namespace" value="ssi-ssi-perf"/>
+                        <property name="masterUrl" value="https://10.0.0.1:443"/>
+                        <property name="namespace" value="ssi-ssi-dev"/>
                     </bean>
                 </property>
             </bean>

@@ -31,18 +31,18 @@
                     <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
                         <property name="name" value="Default_Region"/>
                         <!-- 500 MB initial size (RAM). -->
-                        <property name="initialSize" value="#{2L * 1024 * 1024 * 1024}"/>
+                        <property name="initialSize" value="#{500L * 1024 * 1024}"/>
                         <!-- Setting the size of the default region to 10GB. -->
                         <property name="maxSize" value="#{10L * 1024 * 1024 * 1024}"/>
-                        <!--property name="persistenceEnabled" value="true"/-->
+                        <property name="persistenceEnabled" value="true"/>
                         <!-- Enabling RANDOM_LRU eviction for this region.  -->
-                        <!--property name="pageEvictionMode" value="RANDOM_LRU"/-->
-                        <!-- Increasing the buffer size to 5 GB. -->
-                        <property name="checkpointPageBufferSize" value="#{5L * 1024 * 1024 * 1024}"/>
+                        <property name="pageEvictionMode" value="RANDOM_LRU"/>
+                        <!-- Increasing the buffer size to 1 GB. -->
+                        <property name="checkpointPageBufferSize" value="#{1L * 1024 * 1024 * 1024}"/>
                     </bean>
                 </property>
                 <!-- Set the page size to 8 KB -->
-                <property name="pageSize" value="#{4 * 1024}"/>
+                <property name="pageSize" value="#{8 * 1024}"/>
                 <!-- Changing WAL Mode. -->
                 <property name="walMode" value="NONE"/>
                 <!-- Enable write throttling. -->
@@ -58,7 +58,7 @@
                     -->
                     <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
                         <property name="masterUrl" value="https://10.0.0.1:443"/>
-                        <property name="namespace" value="ssi-ssi-perf"/>
+                        <property name="namespace" value="ssi-ssi-dev"/>
                     </bean>
                 </property>
             </bean>

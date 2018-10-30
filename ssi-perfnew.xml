@@ -58,7 +58,7 @@
                     -->
                     <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
                         <property name="masterUrl" value="https://10.0.0.1:443"/>
-                        <property name="namespace" value="ssi-ssi-dev"/>
+                        <property name="namespace" value="ssi-ssi-perf"/>
                     </bean>
                 </property>
             </bean>

@@ -41,8 +41,8 @@
                         <property name="checkpointPageBufferSize" value="#{1L * 1024 * 1024 * 1024}"/>
                     </bean>
                 </property>
-                <!-- Set the page size to 8 KB -->
-                <property name="pageSize" value="#{8 * 1024}"/>
+                <!-- Set the page size to 4 KB -->
+                <property name="pageSize" value="#{4 * 1024}"/>
                 <!-- Changing WAL Mode. -->
                 <property name="walMode" value="NONE"/>
                 <!-- Enable write throttling. -->
@@ -57,7 +57,7 @@
                         Enables Kubernetes IP finder with default settings.
                     -->
                     <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
-                        <property name="masterUrl" value="https://10.0.0.1:443"/>
+                        <property name="masterUrl" value="https://kubernetes.default.svc.cluster.local:443"/>
                         <property name="namespace" value="ssi-ssi-perf"/>
                     </bean>
                 </property>

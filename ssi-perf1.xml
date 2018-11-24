@@ -29,16 +29,16 @@
                 <!-- Redefining the default region's settings -->
                 <property name="defaultDataRegionConfiguration">
                     <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
-                        <property name="name" value="50GB_Region"/>
+                        <property name="name" value="15GB_Region"/>
                         <!-- 2 GB initial size (RAM). -->
-                        <property name="initialSize" value="#{5L * 1024 * 1024 * 1024}"/>
+                        <property name="initialSize" value="#{1L * 1024 * 1024 * 1024}"/>
                         <!-- Setting the size of the default region to 20GB. -->
-                        <property name="maxSize" value="#{50L * 1024 * 1024 * 1024}"/>
+                        <property name="maxSize" value="#{15L * 1024 * 1024 * 1024}"/>
                         <!--property name="persistenceEnabled" value="true"/-->
                         <!-- Enabling RANDOM_LRU eviction for this region.  -->
                         <property name="pageEvictionMode" value="RANDOM_2_LRU"/>
                         <!-- Increasing the buffer size to 2 GB. -->
-                        <property name="checkpointPageBufferSize" value="#{5L * 1024 * 1024 * 1024}"/>
+                        <property name="checkpointPageBufferSize" value="#{1L * 1024 * 1024 * 1024}"/>
                     </bean>
                 </property>
                 <!-- Set the page size to 8 KB -->
